@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: web-server
+  name: web-server
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: web-server
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25% 
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: web-server
+    spec:
+      containers:
+      - image: httpd:2.4.65-alpine3.22
+        name: httpd
+        resources: {}
+status: {}
