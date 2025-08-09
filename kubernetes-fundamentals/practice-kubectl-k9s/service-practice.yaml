@@ -13,6 +13,6 @@ spec:
     targetPort: 9000
   selector:
     app: practice
-  type: LoadBalancer
+  type: ClusterIP
 status:
   loadBalancer: {}
