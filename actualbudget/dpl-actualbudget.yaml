@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: actual-server
+  labels:
+    app: actual-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: actual-server
+  template:
+    metadata:
+      labels:
+        app: actual-server
+    spec:
+      containers:
+        - name: actual-server
+          image: docker.io/actualbudget/actual-server:latest
+          ports:
+            - containerPort: 5006
+          env:
+            - name: ACTUAL_HTTPS_KEY
+              value: /data/selfhost.key
+            - name: ACTUAL_HTTPS_CERT
+              value: /data/selfhost.crt
+          volumeMounts:
+            - name: actual-data
+              mountPath: /data
+            - name: ssl-certs
+              mountPath: /data/selfhost.key
+              subPath: selfhost.key
+            - name: ssl-certs
+              mountPath: /data/selfhost.crt
+              subPath: selfhost.crt
+          livenessProbe:
+            exec:
+              command:
+                - node
+                - src/scripts/health-check.js
+            initialDelaySeconds: 20
+            periodSeconds: 60
+            timeoutSeconds: 10
+            failureThreshold: 3
+              #          readinessProbe:
+              #exec:
+              #command:
+              #- node
+              #- src/scripts/health-check.js
+            initialDelaySeconds: 20
+            periodSeconds: 60
+            timeoutSeconds: 10
+            failureThreshold: 3
+      volumes:
+        - name: actual-data
+          persistentVolumeClaim:
+            claimName: actual-data-pvc
+        - name: ssl-certs
+          secret:
+            secretName: actual-https-cert

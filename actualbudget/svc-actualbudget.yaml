@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: actual-server
+spec:
+  type: NodePort
+  selector:
+    app: actual-server
+  ports:
+    - protocol: TCP
+      port: 5006
+      targetPort: 5006
+      nodePort: 32006 # Fixed NodePort
+  externalIPs:
+    - "100.111.237.43"
