@@ -6,13 +6,17 @@ metadata:
     app: mealie
   name: mealie
 spec:
+  type: NodePort
   ports:
   - name: "9000"
     port: 9000
     protocol: TCP
     targetPort: 9000
+    nodePort: 32005
+  externalIPs:
+    - "100.111.237.43"
   selector:
     app: mealie
-  type: LoadBalancer
+      #  type: LoadBalancer
 status:
   loadBalancer: {}
