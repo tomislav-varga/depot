@@ -7,7 +7,7 @@ spec:
     storage: 10Gi
   accessModes:
     - ReadWriteMany
-  hostPath:
+  hostPath: # hostPath works only for local clusters; perfect for local dev/testing. For production, use NFS or other networked storage.
     path: /shared
     type: Directory
 --- # separator
