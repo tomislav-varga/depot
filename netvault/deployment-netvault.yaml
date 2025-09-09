@@ -1,0 +1,37 @@
+# deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sftp-server
+  namespace: netvault
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sftp
+  template:
+    metadata:
+      labels:
+        app: sftp
+    spec:
+      containers:
+      - name: sftp
+        image: emberstack/sftp:5.1.71-arm64v8
+        ports:
+        - containerPort: 22
+        volumeMounts:
+        - name: shared-data
+          mountPath: /home/foo/shared
+        volumeMounts:
+        - name: shared-data
+          mountPath: /home/sftp_user/shared
+        - name: sftp-config
+          mountPath: /app/config/sftp.json
+          subPath: sftp.json
+      volumes:
+      - name: shared-data
+        persistentVolumeClaim:
+          claimName: shared-pvc
+      - name: sftp-config
+        configMap:
+          name: sftp-config
