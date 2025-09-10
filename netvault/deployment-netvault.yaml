@@ -21,9 +21,6 @@ spec:
         - containerPort: 22
         volumeMounts:
         - name: shared-data
-          mountPath: /home/foo/shared
-        volumeMounts:
-        - name: shared-data
           mountPath: /home/sftp_user/shared
         - name: sftp-config
           mountPath: /app/config/sftp.json
