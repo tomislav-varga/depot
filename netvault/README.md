@@ -11,7 +11,7 @@ I used an image from DockerHub: emberstack/sftp. I created a deployment and a se
 - I know why a PersistentVolume and a PersistentVolumeClaim are needed, if you want to store data persistently.
 - I learned how to setup permissions and ownership of files and folders in the shared folder to make them accessible to the SFTP user.
 - I learned how to use a NodePort service to expose a deployment on a specific port.
-- I learned that troubleshooting with an AI Agent can be misleading. You still have to think in your own.
+- I learned that troubleshooting with an AI Agent can be misleading. You still have to think on your own.
 
 ## Next steps
 - I want to use a StorageClass to dynamically provision PersistentVolumes. This is the more "Kubernetes way" of doing things as far as I understand it...
