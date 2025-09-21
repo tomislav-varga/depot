@@ -1,2 +1,3 @@
 actualbudget/actual-data/selfhost.key
 netvault/sftp.json
+metallb/metallb-config.yaml
