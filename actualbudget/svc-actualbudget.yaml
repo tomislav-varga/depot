@@ -11,5 +11,3 @@ spec:
       port: 5006
       targetPort: 5006
       nodePort: 32006 # Fixed NodePort
-  externalIPs:
-    - "100.111.237.43"
