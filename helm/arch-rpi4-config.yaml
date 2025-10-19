@@ -1,0 +1,10 @@
+# rpi-scrape-config.yaml
+prometheus:
+  prometheusSpec:
+    additionalScrapeConfigs:
+      - job_name: 'arch-rpi-node'
+        scrape_interval: 30s 
+        static_configs:
+          - targets: ['100.124.241.128:9100']
+            labels:
+              os: 'arch_linux_arm'
